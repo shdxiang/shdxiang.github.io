@@ -167,7 +167,7 @@ kramdown:
 
 collections:
   tabs:
-    output: false
+    output: true
     sort_by: order
 
 defaults:
