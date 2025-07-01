@@ -5,7 +5,7 @@ import requests
 
 from datetime import datetime
 
-API_KEY = "sk-468b9a9e57dc4b8ba707ac2ce986ca7b"
+API_KEY = os.getenv("DEEPSEEK_API_KEY")
 API_URL = "https://api.deepseek.com/v1/chat/completions"
 
 
