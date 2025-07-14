@@ -32,7 +32,7 @@ def main() -> None:
         x.split("-")[3].split(".")[0] for x in os.listdir("_posts") if x.endswith(".md")
     ]
 
-    user_prompt = f"请创作一个800字左右的魔幻现实主义短篇故事, 只输出故事内容, 不要输出任何其他内容。保证故事的创新性，标题和内容都不要与以下故事类似: {', '.join(old_stories)}。"
+    user_prompt = f"请创作一个 800 字左右的魔幻现实主义短篇故事, 只输出故事本身，不要输出任何其他内容。下面是你已经讲过的故事，不要重复: {', '.join(old_stories)}。"
 
     print(user_prompt)
 
