@@ -12,8 +12,8 @@ API_URL = "https://api.deepseek.com/v1/chat/completions"
 def handle_story(story: str) -> None:
     lines = [x.strip() for x in story.split("\n")]
 
-    title = lines[0][1:-1]
-    content = "\n".join(lines[2:])
+    title = lines[0][1:-1].strip("*")
+    content = "\n".join(lines[2:]).strip()
 
     with open(f"_posts/{datetime.now().strftime('%Y-%m-%d')}-{title}.md", "w") as f:
         f.write(f"---\n")
@@ -28,12 +28,15 @@ def main() -> None:
 
     headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
 
-    old_stories = [
-        x.split("-")[3].split(".")[0] for x in os.listdir("_posts") if x.endswith(".md")
-    ]
+    files = [x for x in os.listdir("_posts") if x.endswith(".md")]
+    files.sort()
 
-    user_prompt = f"请创作一个 800 字左右的魔幻现实主义短篇故事, 只输出故事本身，不要输出任何其他内容。下面是你已经讲过的故事，不要重复: {', '.join(old_stories)}。"
+    old_stories = [x.split("-")[3].split(".")[0] for x in files]
+    old_stories = old_stories[-16:]
 
+    user_prompt = f"请创作一个 1024 字左右的魔幻现实主义短篇故事, 只输出故事本身，不要输出任何其他内容。不要重复以下你已经讲过的故事: [{', '.join(old_stories)}]。"
+
+    print("user_prompt:")
     print(user_prompt)
 
     data = {
@@ -54,6 +57,8 @@ def main() -> None:
 
     if "choices" in result:
         story = result["choices"][0]["message"]["content"]
+        print("story:")
+        print(story)
         handle_story(story)
     else:
         print("failed to generate: ", result.get("error"))
