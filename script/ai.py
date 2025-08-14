@@ -12,7 +12,7 @@ API_URL = "https://api.deepseek.com/v1/chat/completions"
 def handle_story(story: str) -> None:
     lines = [x.strip() for x in story.split("\n")]
 
-    title = lines[0][1:-1].strip("*")
+    title = lines[0][1:-1].strip("*").strip("《").strip("》")
     content = "\n".join(lines[2:]).strip()
 
     with open(f"_posts/{datetime.now().strftime('%Y-%m-%d')}-{title}.md", "w") as f:
