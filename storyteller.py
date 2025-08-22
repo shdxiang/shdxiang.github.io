@@ -34,7 +34,8 @@ def main() -> None:
     old_stories = [x.split("-")[3].split(".")[0] for x in files]
     old_stories = old_stories[-16:]
 
-    user_prompt = f"请创作一个 1024 字左右的魔幻现实主义短篇故事, 只输出故事本身，不要输出任何其他内容。不要重复以下你已经讲过的故事: [{', '.join(old_stories)}]。"
+    #user_prompt = f"请创作一个 1024 字左右的魔幻现实主义短篇故事, 故事标题要新颖有吸引力，输出标题和故事内容，不输出其他内容。不要重复以下你已经讲过的故事: [{', '.join(old_stories)}]。"
+    user_prompt = f"请创作一个 800 字左右的魔幻现实主义短篇故事, 输出标题和故事内容，不输出其他内容。"
 
     print("user_prompt:")
     print(user_prompt)

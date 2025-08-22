@@ -2,7 +2,7 @@
 
 git pull
 
-python script/ai.py
+python3 storyteller.py
 
 git add _posts
 
