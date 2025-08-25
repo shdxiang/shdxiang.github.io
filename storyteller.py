@@ -32,10 +32,9 @@ def main() -> None:
     files.sort()
 
     old_stories = [x.split("-")[3].split(".")[0] for x in files]
-    old_stories = old_stories[-16:]
+    old_stories = set(old_stories[-64:])
 
-    #user_prompt = f"请创作一个 1024 字左右的魔幻现实主义短篇故事, 故事标题要新颖有吸引力，输出标题和故事内容，不输出其他内容。不要重复以下你已经讲过的故事: [{', '.join(old_stories)}]。"
-    user_prompt = f"请创作一个 800 字左右的魔幻现实主义短篇故事, 输出标题和故事内容，不输出其他内容。"
+    user_prompt = f"请创作一个 800 字左右的魔幻现实主义短篇故事, 输出标题和故事内容，不输出其他内容。不要使用以下标题：{', '.join(old_stories)}。"
 
     print("user_prompt:")
     print(user_prompt)
@@ -50,7 +49,7 @@ def main() -> None:
             },
         ],
         "temperature": 0.7,
-        "max_tokens": 1500,
+        "max_tokens": 2000,
     }
 
     response = requests.post(API_URL, json=data, headers=headers)
