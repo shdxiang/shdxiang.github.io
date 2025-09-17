@@ -27,3 +27,9 @@ _sass/dist
 assets/js/dist
 
 *.log
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
