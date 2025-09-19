@@ -229,3 +229,5 @@ head:
   - <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png" />
   - <meta name="apple-mobile-web-app-title" content="xiaoxiang.io" />
   - <link rel="manifest" href="/assets/img/favicons/site.webmanifest" />
+  - <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+  - <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
