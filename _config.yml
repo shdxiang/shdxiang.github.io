@@ -59,7 +59,7 @@ analytics:
   google:
     id: # fill in your Google Analytics ID
   goatcounter:
-    id: # fill in your GoatCounter ID
+    id: xiaoxiang
   umami:
     id: # fill in your Umami ID
     domain: # fill in your Umami domain
@@ -73,7 +73,7 @@ analytics:
 
 # Page views settings
 pageviews:
-  provider: # now only supports 'goatcounter'
+  provider: goatcounter
 
 # Prefer color scheme setting.
 #
@@ -229,4 +229,3 @@ head:
   - <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png" />
   - <meta name="apple-mobile-web-app-title" content="xiaoxiang.io" />
   - <link rel="manifest" href="/assets/img/favicons/site.webmanifest" />
-  - <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
