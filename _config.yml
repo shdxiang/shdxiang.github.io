@@ -212,6 +212,8 @@ exclude:
   - LICENSE
   - "*.config.js"
   - package*.json
+  - processed_papers.json
+  - CLAUDE.md
 
 jekyll-archives:
   enabled: []
