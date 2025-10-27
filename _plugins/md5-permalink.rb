@@ -1,21 +1,14 @@
 #!/usr/bin/env ruby
 #
-# Add :hash placeholder for MD5-based permalinks
+# Generate MD5-based permalinks for posts
 
 require 'digest'
 
-module Jekyll
-  module Drops
-    class UrlDrop
-      def hash
-        @obj.data['hash'] || ''
-      end
-    end
-  end
-end
-
-Jekyll::Hooks.register :posts, :post_init do |post|
+Jekyll::Hooks.register :posts, :pre_render do |post|
   # Calculate MD5 hash from post filename
   filename = File.basename(post.path)
-  post.data['hash'] = Digest::MD5.hexdigest(filename)
+  md5_hash = Digest::MD5.hexdigest(filename)
+
+  # Set the permalink directly
+  post.data['permalink'] = "/posts/#{md5_hash}/"
 end
