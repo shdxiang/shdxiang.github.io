@@ -4,11 +4,11 @@
 
 require 'digest'
 
-Jekyll::Hooks.register :posts, :pre_render do |post|
+Jekyll::Hooks.register :posts, :post_init do |post|
   # Calculate MD5 hash from post filename
   filename = File.basename(post.path)
-  hash = Digest::MD5.hexdigest(filename)
+  md5_hash = Digest::MD5.hexdigest(filename)
 
-  # Set hash
-  post.data['hash'] = hash
+  # Set permalink directly
+  post.data['permalink'] = "/posts/#{md5_hash}/"
 end
