@@ -14,7 +14,7 @@ arxiv_id: 2510.22206v1
 
 **arXiv ID**: [2510.22206v1](https://arxiv.org/abs/2510.22206v1)
 
-**PDF链接**: [下载PDF]()
+**PDF链接**: [下载PDF](https://arxiv.org/pdf/2510.22206v1)
 
 ---
 
