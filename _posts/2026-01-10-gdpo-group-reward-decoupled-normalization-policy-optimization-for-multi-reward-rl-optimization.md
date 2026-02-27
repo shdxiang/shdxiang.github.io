@@ -18,8 +18,7 @@ arxiv_id: 2601.05242v1
 
 ---
 
-
-# 多奖励强化学习新突破：GDPO方法如何解决GRPO的归一化陷阱？
+## 多奖励强化学习新突破：GDPO方法如何解决GRPO的归一化陷阱？
 
 ## 论文背景与研究动机
 
@@ -37,7 +36,7 @@ arxiv_id: 2601.05242v1
 
 要理解GDPO的创新，首先需要剖析GRPO的缺陷。GRPO的核心操作是对**整个奖励向量**进行归一化处理。具体来说，它计算所有轨迹（rollout）奖励的均值和标准差，然后对整个奖励向量进行标准化：
 
-```
+```text
 标准化奖励 = (原始奖励 - 全局均值) / 全局标准差
 ```
 
@@ -49,7 +48,7 @@ arxiv_id: 2601.05242v1
 
 GDPO的核心思想是**解耦归一化**。与GRPO的全局归一化不同，GDPO对每个奖励维度**独立进行归一化**：
 
-```
+```text
 对于每个奖励维度i：
 标准化奖励_i = (原始奖励_i - 均值_i) / 标准差_i
 ```
@@ -170,10 +169,10 @@ class QuantGDPO:
             std = np.std(values) + 1e-8  # 避免除零
             normalized[metric] = (values - mean) / std
         return normalized
-    
+
     def compute_advantages(self, normalized_rewards, weights):
         # 加权求和或帕累托优化
-        combined = sum(normalized_rewards[metric] * weights[metric] 
+        combined = sum(normalized_rewards[metric] * weights[metric]
                       for metric in normalized_rewards)
         return self.gae(combined)  # 广义优势估计
 ```

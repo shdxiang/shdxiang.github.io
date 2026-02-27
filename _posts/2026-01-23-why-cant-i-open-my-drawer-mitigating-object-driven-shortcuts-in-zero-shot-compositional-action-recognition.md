@@ -18,8 +18,7 @@ arxiv_id: 2601.16211v1
 
 ---
 
-
-# 从“打不开抽屉”到组合视频理解：RCORE框架如何破解零样本动作识别中的物体捷径
+## 从“打不开抽屉”到组合视频理解：RCORE框架如何破解零样本动作识别中的物体捷径
 
 ## 论文背景与研究动机：当AI学会“偷懒”时
 
@@ -51,12 +50,12 @@ def compositional_augmentation(video1, video2):
     # 提取video1的动词特征和video2的物体特征
     verb_features = extract_verb_features(video1)
     object_features = extract_object_features(video2)
-    
+
     # 保持时间连续性合成新视频
     augmented_video = temporal_alignment_and_fusion(
         verb_features, object_features
     )
-    
+
     return augmented_video
 ```
 
@@ -67,7 +66,7 @@ def compositional_augmentation(video1, video2):
 第二个关键创新是**时间顺序正则化损失**，专门设计来惩罚捷径行为：
 
 **数学形式化**：
-```
+```text
 L_RCORE = L_CE + λ * L_TOR
 ```
 其中L_CE是标准交叉熵损失，L_TOR是时间顺序正则化损失，λ是平衡超参数。
@@ -83,11 +82,11 @@ L_RCORE = L_CE + λ * L_TOR
 def temporal_order_regularization(video_features):
     # 提取时间片段特征
     temporal_segments = split_temporally(video_features)
-    
+
     # 计算正确顺序与扰乱顺序的对比损失
     positive_pairs = correct_temporal_order(temporal_segments)
     negative_pairs = shuffled_temporal_order(temporal_segments)
-    
+
     loss = contrastive_loss(positive_pairs, negative_pairs)
     return loss
 ```

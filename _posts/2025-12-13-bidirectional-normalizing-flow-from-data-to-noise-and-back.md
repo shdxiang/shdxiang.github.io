@@ -18,8 +18,7 @@ arxiv_id: 2512.10953v1
 
 ---
 
-
-# 从数据到噪声再返回：双向归一化流（BiFlow）技术解析
+## 从数据到噪声再返回：双向归一化流（BiFlow）技术解析
 
 ## 一、论文背景与研究动机：归一化流的发展瓶颈与突破契机
 
@@ -47,7 +46,7 @@ arxiv_id: 2512.10953v1
 
 BiFlow的核心创新在于**解耦前向变换与反向生成过程**：
 
-```
+```text
 传统NF：数据 ←[精确逆]→ 噪声（双向对称）
 BiFlow：  数据 → 噪声（前向模型）
           噪声 → 数据（独立反向模型）
@@ -90,18 +89,18 @@ class BiFlow(nn.Module):
     def __init__(self):
         self.forward_model = InvertibleTransformer()  # 可逆前向模型
         self.reverse_model = ParallelGenerator()      # 并行反向模型
-        
+
     def forward_loss(self, x):
         z, log_det = self.forward_model(x)
         log_prob = standard_normal_logprob(z) + log_det
         return -log_prob.mean()
-    
+
     def reverse_loss(self, batch_size):
         z = torch.randn(batch_size, latent_dim)
         x_approx = self.reverse_model(z)
         x_target = self.forward_model.inverse(z)  # 数值逆
         return F.mse_loss(x_approx, x_target)
-    
+
     def generate(self, num_samples):
         z = torch.randn(num_samples, latent_dim)
         return self.reverse_model(z)  # 单次前向生成
@@ -190,13 +189,13 @@ class MarketBiFlow:
         self.forward = FinancialTransformer()
         # 反向模型：生成逼真市场情景
         self.reverse = MarketGenerator()
-    
+
     def generate_scenarios(self, num_scenarios):
         # 从噪声生成多样化市场状态
         noise = sample_correlated_gaussian()
         scenarios = self.reverse(noise)
         return scenarios
-    
+
     def stress_testing(self):
         # 生成极端但合理的市场条件
         extreme_noise = amplify_tail_events()
@@ -234,7 +233,7 @@ class RLEnvironmentGenerator:
     def __init__(self):
         self.biflow = BiFlow()
         # 学习状态-动作-下一状态的转移分布
-    
+
     def generate_diverse_environments(self):
         # 生成具有挑战性的训练环境
         noise = sample_strategic_difficulty()

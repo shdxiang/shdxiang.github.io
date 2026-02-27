@@ -18,8 +18,7 @@ arxiv_id: 2601.22149v1
 
 ---
 
-
-# 从“真实点击”到“梦中训练”：DynaWeb如何革新网络智能体开发范式
+## 从“真实点击”到“梦中训练”：DynaWeb如何革新网络智能体开发范式
 
 ## 论文背景与研究动机：网络智能体训练的“三座大山”
 
@@ -56,16 +55,16 @@ class WebWorldModel(nn.Module):
         self.state_predictor = StatePredictor()
         # 奖励预测器：预测动作的即时奖励
         self.reward_predictor = RewardPredictor()
-    
+
     def forward(self, current_state, action):
         # 编码当前状态和动作
         state_emb = self.encode_state(current_state)
         action_emb = self.encode_action(action)
-        
+
         # 预测下一状态和奖励
         next_state_pred = self.state_predictor(state_emb, action_emb)
         reward_pred = self.reward_predictor(state_emb, action_emb)
-        
+
         return next_state_pred, reward_pred
 ```
 
@@ -98,7 +97,7 @@ DynaWeb采用了一种巧妙的**混合训练策略**，将三种数据源有机
 
 在训练好的世界模型基础上，DynaWeb采用**近端策略优化**（PPO）等现代RL算法进行策略优化：
 
-```
+```text
 训练循环伪代码：
 初始化策略π，世界模型M，经验缓冲区D
 
@@ -111,12 +110,12 @@ for 迭代 in range(总迭代次数):
             下一状态, 奖励 = M(状态, 动作)  # 世界模型预测
             存储(状态, 动作, 奖励, 下一状态)到D
             状态 = 下一状态
-    
+
     # 阶段2：策略优化
     从D中采样批次数据
     计算优势估计和回报
     更新策略π以最大化期望回报
-    
+
     # 阶段3：定期验证与校准
     if 迭代 % 校准间隔 == 0:
         在真实环境中运行π，收集轨迹
@@ -195,13 +194,13 @@ class MarketWorldModel:
         self.market_simulator = MarketSimulator()  # 市场动态模拟
         self.impact_predictor = ImpactPredictor()  # 交易影响预测
         self.slippage_model = SlippageModel()      # 滑点模型
-    
+
     def predict(self, portfolio_state, trade_action):
         # 预测交易动作后的市场状态变化
         price_impact = self.impact_predictor(trade_action)
         new_prices = self.market_simulator(portfolio_state, price_impact)
         execution_cost = self.slippage_model(trade_action, market_liquidity)
-        
+
         return new_prices, execution_cost
 ```
 

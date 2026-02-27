@@ -18,8 +18,7 @@ arxiv_id: 2602.21203v1
 
 ---
 
-
-# 视觉强化学习的“惊鸿一瞥”：Squint如何实现机器人快速仿真到现实迁移
+## 视觉强化学习的“惊鸿一瞥”：Squint如何实现机器人快速仿真到现实迁移
 
 ## 论文背景与研究动机：视觉强化学习的效率困境
 
@@ -167,21 +166,21 @@ class SquintAgent:
         self.replay_buffer = PrioritizedReplayBuffer()
         self.dist_critic = DistributionalCritic()
         self.policy = GaussianPolicy()
-        
+
     def train_step(self):
         # 并行收集数据
         observations = self.collect_parallel()
-        
+
         # 自适应分辨率处理
         processed_obs = self.squint_resolution(observations)
-        
+
         # 分布批评家更新
         critic_loss = self.update_dist_critic(processed_obs)
-        
+
         # 策略网络更新（延迟更新）
         if self.step % self.policy_delay == 0:
             policy_loss = self.update_policy(processed_obs)
-        
+
         # 自适应UDR调整
         self.adjust_udr()
 ```

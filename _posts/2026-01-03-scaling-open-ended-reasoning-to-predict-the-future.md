@@ -18,8 +18,7 @@ arxiv_id: 2512.25070v1
 
 ---
 
-
-# 面向未来的开放推理：OpenForesight如何让语言模型学会预测
+## 面向未来的开放推理：OpenForesight如何让语言模型学会预测
 
 ## 论文背景与研究动机
 
@@ -60,7 +59,7 @@ arxiv_id: 2512.25070v1
 
 论文提出了一种**改进的奖励函数**用于强化学习训练：
 
-```
+```text
 R_total = α·R_accuracy + β·R_calibration + γ·R_consistency
 ```
 
@@ -152,23 +151,23 @@ class ForecastingEnhancedStrategy:
         self.forecaster = forecaster_model
         self.data_api = market_data_api
         self.news_collector = NewsCollector()
-    
+
     def generate_market_outlook(self, asset, horizon="3months"):
         # 收集相关新闻和分析
         context = self.news_collector.get_recent_news(asset)
         economic_data = self.data_api.get_macro_indicators()
-        
+
         # 构建预测问题
         question = f"Based on {context} and economic conditions {economic_data}, "
         question += f"what will be the price trajectory of {asset} over {horizon}?"
-        
+
         # 获取概率化预测
         forecast = self.forecaster.predict(
             question=question,
             require_reasoning=True,
             return_probabilities=True
         )
-        
+
         return self._parse_forecast_to_trading_signals(forecast)
 ```
 

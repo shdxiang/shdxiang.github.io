@@ -18,8 +18,7 @@ arxiv_id: 2512.08931v1
 
 ---
 
-
-# Astra：迈向通用交互式世界模型的里程碑——自回归去噪架构解析
+## Astra：迈向通用交互式世界模型的里程碑——自回归去噪架构解析
 
 ## 论文背景与研究动机：为何世界模型如此重要？
 
@@ -74,7 +73,7 @@ def temporal_causal_attention(query, key, value, mask):
 - 近期历史噪声小（高保真），远期历史噪声大（避免过拟合）
 
 数学上，这一过程可以表示为：
-```
+```text
 h_t' = h_t + ε * σ(t)
 ```
 其中ε∼N(0,1)，σ(t)是随时间衰减的噪声调度函数。
@@ -94,11 +93,11 @@ class MixtureOfActionExperts(nn.Module):
     def __init__(self, num_experts, expert_dim):
         self.experts = nn.ModuleList([ActionExpert() for _ in range(num_experts)])
         self.router = nn.Linear(action_dim, num_experts)
-    
+
     def forward(self, action, context):
         # 动态路由：根据动作类型选择专家
         routing_weights = softmax(self.router(action))
-        output = sum(w * expert(action, context) 
+        output = sum(w * expert(action, context)
                     for w, expert in zip(routing_weights, self.experts))
         return output
 ```
@@ -165,7 +164,7 @@ class FinancialWorldModel:
         self.action_adapter = TradingActionAdapter()
         # 预测未来市场状态
         self.astra_core = AstraModel()
-    
+
     def simulate(self, historical_data, trading_actions):
         # 生成未来市场情景
         future_scenarios = self.astra_core.predict(

@@ -18,8 +18,7 @@ arxiv_id: 2512.02019v1
 
 ---
 
-
-# 扩散模型重塑最大熵强化学习：DiffSAC、DiffPPO与DiffWPO的深度解析
+## 扩散模型重塑最大熵强化学习：DiffSAC、DiffPPO与DiffWPO的深度解析
 
 ## 一、论文背景与研究动机：当扩散模型遇见强化学习
 
@@ -121,7 +120,7 @@ D_{KL}(\pi_\theta \| \pi^*) = \mathbb{E}_{s \sim \rho^\pi}\left[D_{KL}(\pi_\thet
 
 ### 4.1 性能对比
 - **样本效率**：在所有测试环境中，DiffSAC相比原始SAC实现了20-50%的样本效率提升。特别是在稀疏奖励任务中，优势更加明显。
-  
+
 - **最终性能**：DiffSAC在最终回报上平均提升15%，DiffPPO提升12%，DiffWPO在复杂地形任务中表现最佳。
 
 - **探索能力**：扩散策略展现出更强的探索能力，在动作空间中覆盖更广，减少了局部最优陷阱。
@@ -135,7 +134,7 @@ D_{KL}(\pi_\theta \| \pi^*) = \mathbb{E}_{s \sim \rho^\pi}\left[D_{KL}(\pi_\thet
 
 ### 4.3 可视化分析
 - **策略分布可视化**：扩散策略能够学习到更复杂、多模态的动作分布，而传统高斯策略往往过度简化。
-  
+
 - **轨迹多样性**：智能体在相同初始状态下能够生成更多样化的成功轨迹，体现了更好的泛化能力。
 
 ## 五、实践应用建议
@@ -160,7 +159,7 @@ class DiffusionTradingPolicy:
         )
         self.critic = TwinQNetwork(state_dim, action_dim)
         self.temperature = LearnableTemperature()
-    
+
     def generate_action(self, market_state):
         # 扩散过程生成交易动作
         noise = torch.randn(action_dim)

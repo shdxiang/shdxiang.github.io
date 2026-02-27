@@ -18,8 +18,7 @@ arxiv_id: 2601.22157v1
 
 ---
 
-
-# 模型仓库中的“隐藏宝石”：如何高效发现被低估的优质模型
+## 模型仓库中的“隐藏宝石”：如何高效发现被低估的优质模型
 
 ## 论文背景与研究动机
 
@@ -71,7 +70,7 @@ arxiv_id: 2601.22157v1
 
 加速SH算法的伪代码实现如下：
 
-```
+```text
 输入：模型集合M，总查询预算B，淘汰比例α
 输出：排名前k的模型
 
@@ -167,14 +166,14 @@ arxiv_id: 2601.22157v1
    ```python
    # 使用GemFinder的示例代码
    from gemfinder import ModelDiscoverer
-   
+
    discoverer = ModelDiscoverer(
        repository="huggingface",
        model_family="llama-3.1-8B",
        task="math_reasoning",
        budget=5000  # 总查询预算
    )
-   
+
    top_models = discoverer.find_top_k(k=5)
    ```
 

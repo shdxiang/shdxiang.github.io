@@ -18,8 +18,7 @@ arxiv_id: 2512.16917v1
 
 ---
 
-
-# 对抗性强化学习赋能大语言模型推理：Generative Adversarial Reasoner 深度解析
+## 对抗性强化学习赋能大语言模型推理：Generative Adversarial Reasoner 深度解析
 
 ## 论文背景与研究动机
 

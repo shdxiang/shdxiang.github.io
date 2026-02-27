@@ -18,8 +18,7 @@ arxiv_id: 2601.05232v1
 
 ---
 
-
-# 用AI测量与培育和平：从新闻情绪分析到用户媒体素养工具
+## 用AI测量与培育和平：从新闻情绪分析到用户媒体素养工具
 
 ## 论文背景与研究动机：数字时代的和平新定义
 
@@ -153,17 +152,17 @@ class PeaceAnalysisPipeline:
         self.emotion_detector = GoEmotionsAdapter()
         self.context_analyzer = LLMInterface()
         self.peace_scorer = NeuralScorer()
-    
+
     def analyze_content(self, text, metadata):
         # 多特征提取与融合
         embeddings = self.text_processor.encode(text)
         emotions = self.emotion_detector.classify(text)
         context = self.context_analyzer.analyze_narrative(text)
-        
+
         # 多模态扩展点
         if metadata.has_audio:
             tone = self.audio_analyzer.process(metadata.audio)
-            
+
         # 综合评分
         score = self.peace_scorer.fuse(
             embeddings, emotions, context

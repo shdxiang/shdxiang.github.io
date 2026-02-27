@@ -18,8 +18,7 @@ arxiv_id: 2512.09929v1
 
 ---
 
-
-# 弥合世界模型梯度规划中的训练-测试鸿沟：技术解析与应用展望
+## 弥合世界模型梯度规划中的训练-测试鸿沟：技术解析与应用展望
 
 ## 论文背景与研究动机
 
@@ -33,11 +32,11 @@ arxiv_id: 2512.09929v1
 
 论文首先形式化了标准世界模型训练与梯度规划之间的不匹配问题：
 
-- **训练目标**：最小化状态预测误差  
-  `L_train = E[|| s_{t+1} - f_θ(s_t, a_t) ||^2]`  
+- **训练目标**：最小化状态预测误差
+  `L_train = E[|| s_{t+1} - f_θ(s_t, a_t) ||^2]`
   其中`f_θ`为世界模型，`s_t`为状态，`a_t`为动作。
 
-- **测试使用**：通过优化动作序列`A = (a_0, ..., a_H)`最大化累积奖励  
+- **测试使用**：通过优化动作序列`A = (a_0, ..., a_H)`最大化累积奖励
   `max_A Σ_{t=0}^H R(s_t, a_t)`，其中`s_{t+1} = f_θ(s_t, a_t)`。
 
 关键矛盾在于：训练时模型学习的是**单步动态**，而测试时需要的是**多步轨迹的准确模拟**。微小的单步误差在多步展开中会累积放大，导致规划失效。
@@ -113,17 +112,17 @@ arxiv_id: 2512.09929v1
 for epoch in range(num_epochs):
     # 1. 使用历史数据训练基础世界模型
     train_on_historical_data(world_model)
-    
+
     # 2. 定期生成合成交易轨迹
     if epoch % synth_interval == 0:
         synthetic_trajectories = generate_trading_trajectories(
-            world_model, 
+            world_model,
             market_scenarios
         )
-        
+
     # 3. 混合数据重新训练
     mixed_data = mix_historical_synthetic(
-        historical_data, 
+        historical_data,
         synthetic_trajectories
     )
     world_model.train(mixed_data)

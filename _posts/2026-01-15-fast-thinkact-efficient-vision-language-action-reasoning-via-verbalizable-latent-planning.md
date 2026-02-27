@@ -18,8 +18,7 @@ arxiv_id: 2601.09708v1
 
 ---
 
-
-# 从“显式长链”到“可言语化潜规划”：Fast-ThinkAct如何重塑具身智能推理效率
+## 从“显式长链”到“可言语化潜规划”：Fast-ThinkAct如何重塑具身智能推理效率
 
 ## 论文背景与研究动机：具身智能推理的“效率困境”
 
@@ -48,7 +47,7 @@ Fast-ThinkAct的核心创新在于提出了 **“可言语化潜规划（Verbali
 
 **（3）偏好引导的目标函数**：
 这是论文的技术亮点之一。研究者设计了多目标优化函数：
-```
+```text
 L_total = L_action + λ1·L_reasoning + λ2·L_preference
 ```
 其中：
@@ -68,7 +67,7 @@ Fast-ThinkAct实现了**语言与视觉规划能力的联合迁移**：
 
 与传统VLA模型将推理和执行为两个分离阶段不同，Fast-ThinkAct实现了**端到端的推理-执行一体化**：
 
-```
+```text
 视觉输入 + 语言指令 → 潜推理表示 → 动作策略
 ```
 整个流程在单个前向传播中完成，极大减少了延迟。
@@ -152,7 +151,7 @@ class EfficientMarketReasoner:
     def __init__(self):
         self.latent_planner = LatentPlanningModule()  # 潜规划模块
         self.execution_policy = TradingPolicy()  # 执行策略
-        
+
     def decide(self, market_state, news_embedding):
         # 将市场状态和新闻编码为潜表示
         latent_plan = self.latent_planner(market_state, news_embedding)

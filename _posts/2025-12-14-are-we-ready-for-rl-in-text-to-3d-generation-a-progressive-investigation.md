@@ -18,8 +18,7 @@ arxiv_id: 2512.10949v1
 
 ---
 
-
-# 从文本到三维世界的强化学习革命：AR3D-R1如何突破生成瓶颈？
+## 从文本到三维世界的强化学习革命：AR3D-R1如何突破生成瓶颈？
 
 ## 论文背景与研究动机：为何3D生成需要强化学习？
 
@@ -52,7 +51,7 @@ arxiv_id: 2512.10949v1
 # 伪代码示例：奖励集成策略
 reward_ensemble = {
     "human_preference": HumanFeedbackRewardModel(),
-    "multimodal_alignment": CLIPScoreModel(), 
+    "multimodal_alignment": CLIPScoreModel(),
     "geometry_consistency": MeshValidator(),
     "texture_quality": TextureDiscriminator()
 }
@@ -94,10 +93,10 @@ total_reward = sum(weight[i] * reward[i] for i in reward_ensemble)
 这是论文的核心创新——一个专门为3D生成设计的层次化RL框架：
 
 **三层优化结构**：
-```
+```text
 Level 1: 全局形状优化
     └── 奖励：整体轮廓、比例、基本几何
-Level 2: 局部结构细化  
+Level 2: 局部结构细化
     └── 奖励：部件连接、表面连续性
 Level 3: 纹理细节增强
     └── 奖励：材质质感、颜色协调、光照响应
@@ -163,10 +162,10 @@ Level 3: 纹理细节增强
 - 建议组合：夏普比率、最大回撤、胜率、盈亏比等
 
 **分层优化框架**：
-```
+```text
 交易策略层次：
 Level 1: 资产配置优化（宏观层面）
-Level 2: 择时策略优化（中观层面）  
+Level 2: 择时策略优化（中观层面）
 Level 3: 订单执行优化（微观层面）
 ```
 
@@ -185,9 +184,9 @@ Level 3: 订单执行优化（微观层面）
 class ThreeDEvaluator:
     def __init__(self):
         self.geometry_metrics = [...]  # 几何质量指标
-        self.texture_metrics = [...]   # 纹理质量指标  
+        self.texture_metrics = [...]   # 纹理质量指标
         self.consistency_metrics = [...]  # 多视角一致性指标
-    
+
     def evaluate(self, generated_3d):
         return composite_score
 ```

@@ -18,8 +18,7 @@ arxiv_id: 2602.09020v1
 
 ---
 
-
-# 量子化学模拟的混合仿真新范式：解析《量子计算机物理应用高效仿真的混合方法》
+## 量子化学模拟的混合仿真新范式：解析《量子计算机物理应用高效仿真的混合方法》
 
 ## 论文背景与研究动机
 
@@ -56,7 +55,7 @@ arxiv_id: 2602.09020v1
 def hybrid_simulate(circuit):
     pauli_frame = initialize_pauli_frame()  # 初始化泡利框架
     state = None  # 全状态初始为空
-    
+
     for gate in circuit:
         if is_clifford(gate):
             # Clifford门：仅更新泡利框架
@@ -65,16 +64,16 @@ def hybrid_simulate(circuit):
             # 非Clifford门：必要时切换到全状态
             if state is None:
                 state = convert_frame_to_state(pauli_frame)
-            
+
             # 应用延迟执行的多量子比特旋转
             apply_accumulated_rotations(state, pauli_frame)
-            
+
             # 应用当前非Clifford门
             apply_gate(state, gate)
-            
+
             # 更新泡利框架以反映状态变化
             update_pauli_frame_from_state(pauli_frame, state)
-    
+
     return extract_results(pauli_frame, state)
 ```
 

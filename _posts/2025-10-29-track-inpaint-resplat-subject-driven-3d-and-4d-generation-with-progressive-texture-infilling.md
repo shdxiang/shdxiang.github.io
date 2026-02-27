@@ -18,8 +18,7 @@ arxiv_id: 2510.23605v1
 
 ---
 
-
-# 基于渐进纹理修复的主题驱动3D/4D生成新方法：TIRE技术深度解析
+## 基于渐进纹理修复的主题驱动3D/4D生成新方法：TIRE技术深度解析
 
 ## 论文背景与研究动机
 
@@ -64,7 +63,7 @@ for iteration in range(max_iterations):
     for scale in [coarse, medium, fine]:
         # 基于当前尺度生成修复候选
         inpaint_results = subject_driven_inpainting(
-            problematic_regions, 
+            problematic_regions,
             reference_features,
             scale=scale
         )

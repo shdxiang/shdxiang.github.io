@@ -18,8 +18,7 @@ arxiv_id: 2512.16919v1
 
 ---
 
-
-# 从无序图像到精确三维：DVGT如何革新自动驾驶的几何感知
+## 从无序图像到精确三维：DVGT如何革新自动驾驶的几何感知
 
 ## 论文背景与研究动机：自动驾驶的“几何困境”
 
@@ -38,7 +37,7 @@ arxiv_id: 2512.16919v1
 
 DVGT采用了一种创新的编码器-解码器架构，其核心思想是**仅凭视觉序列推断三维几何关系**，无需相机位姿先验。流程如下：
 
-```
+```text
 输入：多视角图像序列 → DINO特征提取 → 三阶段注意力机制 → 全局点云解码
 ```
 
@@ -57,15 +56,15 @@ def DVGT_attention(features):
     # 阶段1：帧内局部注意力
     # 在单张图像内部建立局部几何关系
     intra_view_features = LocalAttention(features)
-    
-    # 阶段2：跨视图空间注意力  
+
+    # 阶段2：跨视图空间注意力
     # 在不同相机视角间建立对应关系
     cross_view_features = SpatialAttention(intra_view_features)
-    
+
     # 阶段3：跨帧时序注意力
     # 利用时间连续性优化几何一致性
     temporal_features = TemporalAttention(cross_view_features)
-    
+
     return temporal_features
 ```
 
@@ -138,17 +137,17 @@ class AutonomousPerceptionSystem:
     def __init__(self):
         self.dvgt_model = load_dvgt_pretrained()
         self.tracker = MultiObjectTracker()
-        
+
     def process_frame_sequence(self, image_sequence):
         # 1. 使用DVGT进行几何重建
         point_cloud, ego_poses = self.dvgt_model(image_sequence)
-        
+
         # 2. 结合目标检测进行场景理解
         objects = detect_objects(image_sequence[-1])
-        
+
         # 3. 将检测结果投影到三维点云
         labeled_point_cloud = project_detections(point_cloud, objects)
-        
+
         # 4. 用于路径规划和决策
         return planning_module(labeled_point_cloud, ego_poses)
 ```

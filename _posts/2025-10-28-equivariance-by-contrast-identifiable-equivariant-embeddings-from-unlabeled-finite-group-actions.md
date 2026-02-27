@@ -18,8 +18,7 @@ arxiv_id: 2510.21706v1
 
 ---
 
-
-# 从无标注数据中学习等变表示：Equivariance by Contrast方法深度解析
+## 从无标注数据中学习等变表示：Equivariance by Contrast方法深度解析
 
 ## 论文背景与研究动机
 

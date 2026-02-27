@@ -18,8 +18,7 @@ arxiv_id: 2601.05245v1
 
 ---
 
-
-# 信息论视角下的在线多校准：紧下界证明与理论突破
+## 信息论视角下的在线多校准：紧下界证明与理论突破
 
 ## 论文背景与研究动机
 
@@ -165,7 +164,7 @@ class MulticlassCalibrationMonitor:
         self.groups = group_functions
         self.alpha = alpha
         self.calibration_errors = {}
-    
+
     def update(self, predictions, contexts, true_returns):
         for group_name, group_func in self.groups.items():
             group_mask = group_func(contexts, predictions)
@@ -175,9 +174,9 @@ class MulticlassCalibrationMonitor:
                 calibration_error = self._compute_calibration_error(
                     group_preds, group_true)
                 self.calibration_errors[group_name] = calibration_error
-    
+
     def check_violations(self):
-        return {g: err for g, err in self.calibration_errors.items() 
+        return {g: err for g, err in self.calibration_errors.items()
                 if err > self.alpha}
 ```
 

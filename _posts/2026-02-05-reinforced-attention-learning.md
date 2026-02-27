@@ -18,8 +18,7 @@ arxiv_id: 2602.04884v1
 
 ---
 
-
-# 从“生成什么”到“关注哪里”：Reinforced Attention Learning如何革新多模态大模型训练范式
+## 从“生成什么”到“关注哪里”：Reinforced Attention Learning如何革新多模态大模型训练范式
 
 ## 论文背景与研究动机：多模态大模型的后训练困境
 

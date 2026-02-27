@@ -18,8 +18,7 @@ arxiv_id: 2512.25063v1
 
 ---
 
-
-# 从单一模型到群体智能：贝叶斯Transformer如何开启“多心智”AI新时代
+## 从单一模型到群体智能：贝叶斯Transformer如何开启“多心智”AI新时代
 
 ## 论文背景与研究动机：为何需要“多心智”AI？
 
@@ -123,7 +122,7 @@ $$y_{\text{ensemble}} = \frac{1}{K} \sum_{k=1}^K f_{\theta_k}(x)$$
        model_instance = btrans.sample_instance()
        strategy = model_instance.generate_strategy(market_conditions)
        strategies.append(strategy)
-   
+
    # 群体投票选择最佳策略
    final_decision = aggregate_strategies(strategies)
    ```

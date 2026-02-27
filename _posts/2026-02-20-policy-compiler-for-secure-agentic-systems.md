@@ -18,8 +18,7 @@ arxiv_id: 2602.16708v1
 
 ---
 
-
-# 从“提示词约束”到“确定性执行”：PCAS如何为智能体系统构建安全护栏
+## 从“提示词约束”到“确定性执行”：PCAS如何为智能体系统构建安全护栏
 
 ## 论文背景与研究动机：智能体安全治理的迫切需求
 
@@ -52,12 +51,12 @@ PCAS的核心创新在于将智能体系统状态建模为**依赖图（Dependen
 PCAS采用基于Datalog的逻辑编程语言表达安全策略，具有以下特点：
 
 **策略示例：数据访问控制**
-```
+```text
 // 定义敏感数据类别
 sensitive_data(DataID) :- data_classification(DataID, "PII").
 
 // 定义授权用户
-authorized_for(User, DataID) :- 
+authorized_for(User, DataID) :-
     user_role(User, "Analyst"),
     data_department(DataID, "Analytics").
 
@@ -78,7 +77,7 @@ violation("Unauthorized data access") :-
 PCAS采用两阶段执行架构：
 
 **编译阶段：**
-```
+```text
 输入：原始智能体实现 + 策略规范
        ↓
 静态分析构建初始依赖图
@@ -186,7 +185,7 @@ secure_system.run()
 3. **审计追踪**：完整记录所有决策的依赖路径，满足监管要求
 
 **交易策略合规示例：**
-```
+```text
 // 禁止高风险交易未经审批
 requires_approval(Trade) :-
     trade_risk_level(Trade, "High"),

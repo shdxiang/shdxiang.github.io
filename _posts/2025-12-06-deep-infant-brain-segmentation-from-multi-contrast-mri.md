@@ -18,8 +18,7 @@ arxiv_id: 2512.05114v1
 
 ---
 
-
-# 婴儿大脑MRI多模态分割的突破：BabySeg框架深度解析
+## 婴儿大脑MRI多模态分割的突破：BabySeg框架深度解析
 
 ## 一、研究背景与动机：为何婴儿大脑分割是医学影像的“硬骨头”
 
@@ -51,16 +50,16 @@ class DomainRandomizationGenerator:
     def generate_training_sample(self):
         # 1. 随机选择解剖模板（不同月龄）
         template = random_select(developmental_atlases)
-        
+
         # 2. 随机应用发育变形场
         deformation = generate_random_deformation_field()
-        
+
         # 3. 随机选择MRI对比度参数
         contrast_params = sample_from_clinical_distributions()
-        
+
         # 4. 随机添加伪影
         artifacts = add_motion_artifact() + add_bias_field()
-        
+
         return synthesize_image(template, deformation, contrast_params, artifacts)
 ```
 
@@ -144,7 +143,7 @@ longitudinal_results = []
 for timepoint in ['baseline', '6month', '12month']:
     mri_scans = load_scans(patient_id, timepoint)
     segmentation, uncertainty = pipeline.predict(mri_scans)
-    
+
     # 自动计算发育指标
     metrics = calculate_developmental_metrics(segmentation)
     longitudinal_results.append(metrics)

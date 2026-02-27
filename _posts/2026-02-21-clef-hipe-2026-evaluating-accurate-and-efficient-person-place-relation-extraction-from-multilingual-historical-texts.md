@@ -18,8 +18,7 @@ arxiv_id: 2602.17663v1
 
 ---
 
-
-# 从历史文本中精准定位人物足迹：CLEF HIPE-2026评测任务深度解析
+## 从历史文本中精准定位人物足迹：CLEF HIPE-2026评测任务深度解析
 
 ## 引言：当历史档案遇见人工智能
 
@@ -142,7 +141,7 @@ HIPE-2026最显著的创新在于其“三支柱”评估体系：
        def __init__(self, name):
            self.name = name
            self.location_timeline = []  # 时间-地点序列
-       
+
        def add_location(self, time_interval, location, relation_type):
            # 添加经过验证的人物-地点关系
            self.location_timeline.append({
@@ -160,7 +159,7 @@ HIPE-2026最显著的创新在于其“三支柱”评估体系：
 ### 5.2 在知识图谱构建中的应用
 **技术路线建议**：
 1. **动态知识图谱架构设计**
-   ```
+```text
    传统静态图谱：实体-关系-实体
    动态时空图谱：实体-关系[时间区间]-实体[空间坐标]
    ```

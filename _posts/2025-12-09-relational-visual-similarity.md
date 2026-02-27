@@ -18,8 +18,7 @@ arxiv_id: 2512.07833v1
 
 ---
 
-
-# 超越表面相似性：视觉关系相似性度量模型的突破与启示
+## 超越表面相似性：视觉关系相似性度量模型的突破与启示
 
 ## 引言：从“像什么”到“为什么像”——视觉理解的范式转变
 
@@ -87,7 +86,7 @@ arxiv_id: 2512.07833v1
 改进后的目标：**最大化具有相同关系结构的图像对在嵌入空间中的接近度**
 
 损失函数设计：
-```
+```text
 L = -log[exp(sim(I_i, T_i)/τ) / Σ_j exp(sim(I_i, T_j)/τ)]
 ```
 其中T_i是I_i的匿名化关系描述，τ为温度参数
@@ -130,7 +129,7 @@ L = -log[exp(sim(I_i, T_i)/τ) / Σ_j exp(sim(I_i, T_j)/τ)]
 论文设计了多个实验验证模型性能：
 
 #### 1. 关系类比测试（Relational Analogy Test）
-- 任务：给定A:B，找到对应的C:？ 
+- 任务：给定A:B，找到对应的C:？
 - 示例：车轮：汽车 :: ？：人体
 - 结果：关系感知模型准确率68.2%，显著高于CLIP（42.1%）和随机基线（25%）
 
@@ -186,13 +185,13 @@ L = -log[exp(sim(I_i, T_i)/τ) / Σ_j exp(sim(I_i, T_j)/τ)]
 def generate_relational_signal(current_market, historical_patterns):
     # 将市场数据转换为多尺度关系图
     current_relations = extract_relations(current_market)
-    
+
     # 在历史模式中寻找关系相似性最高的时期
     best_match = find_most_similar(historical_patterns, current_relations)
-    
+
     # 基于匹配模式的关系结构预测未来演变
     prediction = predict_by_relational_analogy(best_match)
-    
+
     return prediction
 ```
 

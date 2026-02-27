@@ -18,8 +18,7 @@ arxiv_id: 2512.16921v1
 
 ---
 
-
-# 从“平均分”到“错题本”：AuditDM如何为多模态大模型做深度“体检”
+## 从“平均分”到“错题本”：AuditDM如何为多模态大模型做深度“体检”
 
 ## 论文背景与研究动机：为何传统评估方法已不够用？
 
@@ -51,7 +50,7 @@ AuditDM首先选择一个基础MLLM作为“审计员”，通过强化学习对
 2. **反事实图像**：通过对原始图像进行最小但语义关键的修改而生成的图像
 
 强化学习的奖励函数设计巧妙：
-```
+```text
 奖励 = 目标模型之间的回答差异度 + 生成内容的质量惩罚
 ```
 这种设计确保审计员既能够发现模型间的真实差异，又不会生成无意义的噪声数据。
@@ -145,18 +144,18 @@ class TradingModelAuditor:
     def __init__(self, target_models):
         self.auditor = RLAgent()  # 强化学习审计员
         self.target_models = target_models
-    
+
     def discover_failure_modes(self):
         # 生成挑战性市场情景
         challenging_scenarios = self.auditor.generate_scenarios(
             objective='maximize_strategy_disagreement'
         )
-        
+
         # 分析策略分歧模式
         failure_clusters = self.cluster_failures(challenging_scenarios)
-        
+
         return failure_clusters
-    
+
     def rectify_strategies(self, failure_data):
         # 使用失败数据增强训练
         for model in self.target_models:
@@ -206,7 +205,7 @@ class TradingModelAuditor:
 
 **元审计框架**
 训练能够审计“审计员”的元模型，形成审计能力的自我提升循环：
-```
+```text
 模型 → 审计员发现缺陷 → 修复模型
   ↑                        ↓
 元审计优化审计员 ← 评估修复效果

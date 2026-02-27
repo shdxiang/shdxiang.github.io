@@ -18,8 +18,7 @@ arxiv_id: 2512.21336v1
 
 ---
 
-
-# 从“解码路径之困”到“不确定性之钥”：掩码扩散模型解码路径优化新范式深度解析
+## 从“解码路径之困”到“不确定性之钥”：掩码扩散模型解码路径优化新范式深度解析
 
 ## 一、研究背景与动机：非自回归生成的“自由之困”
 
@@ -127,7 +126,7 @@ def generate_financial_report(prompt, model, n_candidates=5):
         # 使用实时引导生成
         report, total_entropy = entropy_guided_generation(prompt, model)
         candidates.append((report, total_entropy))
-    
+
     # 选择最低熵的报告
     best_report = min(candidates, key=lambda x: x[1])[0]
     return best_report

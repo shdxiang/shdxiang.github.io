@@ -18,8 +18,7 @@ arxiv_id: 2512.16920v1
 
 ---
 
-
-# EasyV2V：指令驱动视频编辑的革命性突破——从数据构建到统一控制的全栈解析
+## EasyV2V：指令驱动视频编辑的革命性突破——从数据构建到统一控制的全栈解析
 
 ## 一、研究背景与动机：视频编辑的“三座大山”
 
@@ -90,7 +89,7 @@ EasyV2V提出了**统一掩码机制**，将空间和时间控制融为一体：
 **参考图像支持**：可选参考图像提供具体编辑目标的外观指导
 
 **控制流程**：
-```
+```text
 输入 → [视频 + 文本指令 + (可选)掩码 + (可选)参考图像]
       ↓
 统一编码 → 条件拼接 → LoRA微调模型 → 编辑后视频
@@ -147,17 +146,17 @@ class EasyV2VEditor:
     def __init__(self, pretrained_model):
         self.model = pretrained_model
         self.lora_adapter = load_lora_weights()
-        
-    def edit_video(self, video, instruction, 
+
+    def edit_video(self, video, instruction,
                    mask=None, reference=None):
         # 统一编码输入
         encoded_input = self.encode_inputs(
             video, instruction, mask, reference)
-        
+
         # LoRA增强推理
         with lora_context(self.lora_adapter):
             edited_frames = self.model(encoded_input)
-            
+
         return compose_video(edited_frames)
 ```
 

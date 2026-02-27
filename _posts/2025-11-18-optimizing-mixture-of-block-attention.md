@@ -18,8 +18,7 @@ arxiv_id: 2511.11571v1
 
 ---
 
-
-# 《Optimizing Mixture of Block Attention》论文深度解析：稀疏注意力机制的高效实现突破
+## 《Optimizing Mixture of Block Attention》论文深度解析：稀疏注意力机制的高效实现突破
 
 ## 论文背景与研究动机
 
