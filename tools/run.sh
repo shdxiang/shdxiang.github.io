@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 #
-# Run jekyll serve and then launch the site
+# Run Astro dev server
 
 prod=false
-command="bundle exec jekyll s -l"
+command="npm run dev --"
 host="127.0.0.1"
+port="4321"
 
 help() {
   echo "Usage:"
@@ -13,7 +14,8 @@ help() {
   echo
   echo "Options:"
   echo "     -H, --host [HOST]    Host to bind to."
-  echo "     -p, --production     Run Jekyll in 'production' mode."
+  echo "     -P, --port [PORT]    Port to bind to."
+  echo "     -p, --production     Run Astro in production mode preview."
   echo "     -h, --help           Print this help information."
 }
 
@@ -22,6 +24,10 @@ while (($#)); do
   case $opt in
   -H | --host)
     host="$2"
+    shift 2
+    ;;
+  -P | --port)
+    port="$2"
     shift 2
     ;;
   -p | --production)
@@ -40,14 +46,10 @@ while (($#)); do
   esac
 done
 
-command="$command -H $host"
+command="$command --host $host --port $port"
 
 if $prod; then
-  command="JEKYLL_ENV=production $command"
-fi
-
-if [ -e /proc/1/cgroup ] && grep -q docker /proc/1/cgroup; then
-  command="$command --force_polling"
+  command="npm run build && npm run preview -- --host $host --port $port"
 fi
 
 echo -e "\n> $command\n"

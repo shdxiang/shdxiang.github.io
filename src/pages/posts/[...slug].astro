@@ -1,0 +1,54 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { siteConfig } from "../../config/site";
+import { formatDate, getPostPath } from "../../lib/posts";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: getPostPath(post).replace(/^\/posts\//, "").replace(/\/$/, "") },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+---
+
+<BaseLayout
+  title={`${post.data.title} | ${siteConfig.title}`}
+  description={post.data.description ?? post.data.title}
+>
+  <article class="post">
+    <header class="post-header">
+      <a class="back" href="/">← 返回首页</a>
+      <h1>{post.data.title}</h1>
+      <p class="meta">
+        <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+        {post.data.arxiv_id && (
+          <a href={`https://arxiv.org/abs/${post.data.arxiv_id}`} target="_blank" rel="noreferrer">
+            arXiv: {post.data.arxiv_id}
+          </a>
+        )}
+      </p>
+    </header>
+
+    {headings.length > 0 && (
+      <aside class="toc">
+        <strong>目录</strong>
+        <ul>
+          {headings
+            .filter((h) => h.depth <= 3)
+            .map((h) => (
+              <li class={`d-${h.depth}`}><a href={`#${h.slug}`}>{h.text}</a></li>
+            ))}
+        </ul>
+      </aside>
+    )}
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

@@ -7,13 +7,14 @@ Gemfile.lock
 .jekyll-cache
 .jekyll-metadata
 _site
+.astro
+dist
 
 # RubyGems
 *.gem
 
 # NPM dependencies
 node_modules
-package-lock.json
 
 # IDE configurations
 .idea
