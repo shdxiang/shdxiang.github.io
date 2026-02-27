@@ -2,12 +2,12 @@
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { siteConfig } from "../../config/site";
-import { formatDate, getPostPath } from "../../lib/posts";
+import { formatDate, getPostHash } from "../../lib/posts";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts", ({ data }) => !data.draft);
   return posts.map((post) => ({
-    params: { slug: getPostPath(post).replace(/^\/posts\//, "").replace(/\/$/, "") },
+    params: { slug: getPostHash(post) },
     props: { post }
   }));
 }

@@ -1,0 +1,59 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { siteConfig } from "../../config/site";
+import { formatDate, getPostPath } from "../../lib/posts";
+
+export async function getStaticPaths({ paginate }) {
+  const posts = (await getCollection("posts", ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime()
+  );
+
+  return paginate(posts, { pageSize: 24 });
+}
+
+const { page } = Astro.props;
+---
+
+<BaseLayout
+  title={`${siteConfig.title} | Research Notes | Page ${page.currentPage}`}
+  description={siteConfig.description}
+>
+  <section class="home-list">
+    <div class="section-head">
+      <p class="section-title">Latest Notes</p>
+      <small>
+        按时间倒序，第 {page.currentPage} 页 / 共 {page.lastPage} 页（共 {page.total} 篇）
+      </small>
+    </div>
+    <section class="grid">
+      {page.data.map((post) => (
+        <a class="card" href={getPostPath(post)}>
+          <h3>{post.data.title}</h3>
+          {post.data.description && <p class="card-desc">{post.data.description}</p>}
+          <p class="meta">
+            <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+            {post.data.arxiv_id && <span>arXiv: {post.data.arxiv_id}</span>}
+          </p>
+        </a>
+      ))}
+    </section>
+    <nav class="pager" aria-label="Pagination">
+      <span class="pager-status">
+        第 {page.currentPage} 页 / 共 {page.lastPage} 页
+      </span>
+      <div class="pager-links">
+        {page.url.prev && (
+          <a class="pager-link" href={page.url.prev}>
+            上一页
+          </a>
+        )}
+        {page.url.next && (
+          <a class="pager-link" href={page.url.next}>
+            下一页
+          </a>
+        )}
+      </div>
+    </nav>
+  </section>
+</BaseLayout>

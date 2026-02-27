@@ -7,44 +7,58 @@ import { formatDate, getPostPath } from "../lib/posts";
 const posts = (await getCollection("posts", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
-const featured = posts[0];
-const recent = posts.slice(1, 25);
+const pageSize = 24;
+const recent = posts.slice(0, pageSize);
+const totalPosts = posts.length;
+const totalPages = Math.ceil(totalPosts / pageSize);
 ---
 
 <BaseLayout
   title={`${siteConfig.title} | Research Notes`}
   description={siteConfig.description}
 >
-  <section class="hero">
-    <p class="eyebrow">Research Notes</p>
-    <h1>Modern Astro-powered blog for fast reading and publishing.</h1>
-    <p class="subtitle">内容来自你现有的 `_posts`，发布流程保持 Markdown 驱动。</p>
+  <section class="home-hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Research Notes</p>
+      <h1>把论文、实验和洞察沉淀成可检索的长期资产。</h1>
+      <p class="subtitle">
+        这是一个以 Markdown 为核心的研究笔记站点，聚焦机器学习、量化和工程化实践。
+      </p>
+      <div class="hero-links">
+        <a href={siteConfig.social.github} target="_blank" rel="noreferrer">GitHub</a>
+        <a href={siteConfig.social.twitter} target="_blank" rel="noreferrer">X</a>
+      </div>
+    </div>
   </section>
 
-  {
-    featured && (
-      <a class="featured" href={getPostPath(featured)}>
-        <span class="label">Featured</span>
-        <h2>{featured.data.title}</h2>
-        <p class="meta">
-          <time datetime={featured.data.date.toISOString()}>
-            {formatDate(featured.data.date)}
-          </time>
-          {featured.data.arxiv_id && <span>arXiv: {featured.data.arxiv_id}</span>}
-        </p>
-      </a>
-    )
-  }
-
-  <section class="grid">
-    {recent.map((post) => (
-      <a class="card" href={getPostPath(post)}>
-        <h3>{post.data.title}</h3>
-        <p class="meta">
-          <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
-          {post.data.arxiv_id && <span>arXiv: {post.data.arxiv_id}</span>}
-        </p>
-      </a>
-    ))}
+  <section class="home-list">
+    <div class="section-head">
+      <p class="section-title">Latest Notes</p>
+      <small>
+        按时间倒序，第 1 页 / 共 {totalPages} 页（共 {totalPosts} 篇）
+      </small>
+    </div>
+    <section class="grid">
+      {recent.map((post) => (
+        <a class="card" href={getPostPath(post)}>
+          <h3>{post.data.title}</h3>
+          {post.data.description && <p class="card-desc">{post.data.description}</p>}
+          <p class="meta">
+            <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+            {post.data.arxiv_id && <span>arXiv: {post.data.arxiv_id}</span>}
+          </p>
+        </a>
+      ))}
+    </section>
+    {
+      totalPages > 1 && (
+        <nav class="pager" aria-label="Pagination">
+          <span class="pager-status">第 1 页 / 共 {totalPages} 页</span>
+          <div class="pager-links">
+            <a class="pager-link" href="/page/2/">下一页</a>
+          </div>
+        </nav>
+      )
+    }
   </section>
 </BaseLayout>
