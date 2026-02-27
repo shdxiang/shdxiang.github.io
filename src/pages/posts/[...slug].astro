@@ -39,14 +39,17 @@ const homePath = withBase("/");
 
     {headings.length > 0 && (
       <aside class="toc">
-        <strong>目录</strong>
-        <ul>
-          {headings
-            .filter((h) => h.depth <= 3)
-            .map((h) => (
-              <li class={`d-${h.depth}`}><a href={`#${h.slug}`}>{h.text}</a></li>
-            ))}
-        </ul>
+        <button class="toc-toggle" aria-expanded="false" aria-controls="toc-body">目录</button>
+        <strong class="toc-label">目录</strong>
+        <div id="toc-body" class="toc-body">
+          <ul>
+            {headings
+              .filter((h) => h.depth <= 3)
+              .map((h) => (
+                <li class={`d-${h.depth}`}><a href={`#${h.slug}`}>{h.text}</a></li>
+              ))}
+          </ul>
+        </div>
       </aside>
     )}
 
@@ -55,32 +58,63 @@ const homePath = withBase("/");
     </div>
   </article>
   <script is:inline>
-    document.addEventListener("click", async (event) => {
-      const target = event.target;
+    // TOC toggle for mobile
+    document.querySelectorAll(".toc-toggle").forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        var expanded = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", String(!expanded));
+        var body = btn.nextElementSibling.nextElementSibling;
+        if (body) body.classList.toggle("is-open");
+      });
+    });
+
+    // Copy code button (with execCommand fallback for non-HTTPS)
+    function fallbackCopy(text) {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.cssText = "position:fixed;left:-9999px;top:-9999px;opacity:0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { return document.execCommand("copy"); } catch { return false; }
+      finally { document.body.removeChild(ta); }
+    }
+
+    document.addEventListener("click", async function(event) {
+      var target = event.target;
       if (!(target instanceof Element)) return;
-      const button = target.closest(".copy-code-btn");
+      var button = target.closest(".copy-code-btn");
       if (!(button instanceof HTMLButtonElement)) return;
-      const wrapper = button.closest(".code-block");
-      const code = wrapper?.querySelector("pre code");
-      if (!(code instanceof HTMLElement) || !navigator.clipboard) return;
+      var wrapper = button.closest(".code-block");
+      var code = wrapper && wrapper.querySelector("pre code");
+      if (!(code instanceof HTMLElement)) return;
+      var text = code.innerText;
+      var ok = false;
       try {
-        await navigator.clipboard.writeText(code.innerText);
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+          ok = true;
+        } else {
+          ok = fallbackCopy(text);
+        }
+      } catch {
+        ok = fallbackCopy(text);
+      }
+      if (ok) {
         button.classList.remove("is-failed");
         button.classList.add("is-copied");
         button.setAttribute("aria-label", "Copied");
         button.setAttribute("title", "Copied");
-      } catch {
+      } else {
         button.classList.remove("is-copied");
         button.classList.add("is-failed");
         button.setAttribute("aria-label", "Copy failed");
         button.setAttribute("title", "Copy failed");
-      } finally {
-        window.setTimeout(() => {
-          button.classList.remove("is-copied", "is-failed");
-          button.setAttribute("aria-label", "Copy code");
-          button.setAttribute("title", "Copy code");
-        }, 1200);
       }
+      window.setTimeout(function() {
+        button.classList.remove("is-copied", "is-failed");
+        button.setAttribute("aria-label", "Copy code");
+        button.setAttribute("title", "Copy code");
+      }, 1200);
     });
   </script>
 </BaseLayout>

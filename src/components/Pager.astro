@@ -42,33 +42,33 @@ const visibleItems = getVisibleItems(currentPage, lastPage);
   <span class="pager-status">
     第 {currentPage} 页 / 共 {lastPage} 页
   </span>
-  <div class="pager-links">
+  <div class="pager-nav">
     {prevUrl && (
       <a class="pager-link" href={prevUrl}>
         上一页
       </a>
     )}
-    <div class="pager-pages">
-      {visibleItems.map((item) =>
-        item === "ellipsis" ? (
-          <span class="pager-ellipsis" aria-hidden="true">
-            ...
-          </span>
-        ) : (
-          <a
-            class:list={["pager-page", item === currentPage && "is-current"]}
-            href={getPageUrl(item)}
-            aria-current={item === currentPage ? "page" : undefined}
-          >
-            {item}
-          </a>
-        )
-      )}
-    </div>
     {nextUrl && (
       <a class="pager-link" href={nextUrl}>
         下一页
       </a>
+    )}
+  </div>
+  <div class="pager-pages">
+    {visibleItems.map((item) =>
+      item === "ellipsis" ? (
+        <span class="pager-ellipsis" aria-hidden="true">
+          ...
+        </span>
+      ) : (
+        <a
+          class:list={["pager-page", item === currentPage && "is-current"]}
+          href={getPageUrl(item)}
+          aria-current={item === currentPage ? "page" : undefined}
+        >
+          {item}
+        </a>
+      )
     )}
   </div>
   <form
