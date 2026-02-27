@@ -20,6 +20,8 @@ html,
 body {
   margin: 0;
   padding: 0;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -29,6 +31,14 @@ body {
     radial-gradient(circle at 95% 0%, #ffe9d4, transparent 30%),
     var(--bg);
   line-height: 1.7;
+}
+
+img,
+svg,
+video,
+canvas,
+iframe {
+  max-width: 100%;
 }
 
 a {
@@ -426,6 +436,8 @@ a {
   padding: 1.35rem;
   line-height: 1.78;
   font-size: 1.03rem;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .prose > *:first-child {
@@ -687,7 +699,9 @@ a {
 
   .pager-links {
     width: 100%;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
   }
 
   .pager-jump {
@@ -696,11 +710,16 @@ a {
   }
 
   .pager-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 0.8rem;
     padding: 0.28rem 0.7rem;
   }
 
   .pager-pages {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
     max-width: 100%;
     overflow-x: auto;
     flex-wrap: nowrap;
@@ -818,7 +837,7 @@ a {
   }
 
   .pager-links {
-    gap: 0.35rem;
+    gap: 0.3rem;
   }
 
   .pager-link {
