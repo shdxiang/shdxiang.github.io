@@ -17,17 +17,13 @@ const secondPagePath = withBase("/page/2/");
 ---
 
 <BaseLayout
-  title={`${siteConfig.title} | 研究笔记`}
+  title={siteConfig.title}
   description={siteConfig.description}
 >
-  <section class="home-hero">
-    <div class="hero-copy">
-      <h1>前沿论文的持续收集与整理</h1>
-      <p class="subtitle">
-        涵盖机器学习、量子计算、机器人、物理学等方向。仅作梳理存档，并非每篇都已精读。
-      </p>
-    </div>
-  </section>
+  <header class="home-intro">
+    <h1>前沿论文的持续收集与整理</h1>
+    <p>涵盖机器学习、量子计算、机器人、物理学等方向。</p>
+  </header>
 
   <section class="home-list">
     <section class="grid">
