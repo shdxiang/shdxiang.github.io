@@ -16,12 +16,12 @@ const { page } = Astro.props;
 ---
 
 <BaseLayout
-  title={`${siteConfig.title} | Research Notes | Page ${page.currentPage}`}
+  title={`${siteConfig.title} | 研究笔记 | 第 ${page.currentPage} 页`}
   description={siteConfig.description}
 >
   <section class="home-list">
     <div class="section-head">
-      <p class="section-title">Latest Notes</p>
+      <p class="section-title">最新笔记</p>
       <small>
         按时间倒序，第 {page.currentPage} 页 / 共 {page.lastPage} 页（共 {page.total} 篇）
       </small>
