@@ -1,6 +1,7 @@
 import type { CollectionEntry } from "astro:content";
 import { createHash } from "node:crypto";
 import { basename } from "node:path";
+import { withBase } from "./paths";
 
 function getPostFilename(post: CollectionEntry<"posts">): string {
   if (post.filePath) {
@@ -14,7 +15,7 @@ export function getPostHash(post: CollectionEntry<"posts">): string {
 }
 
 export function getPostPath(post: CollectionEntry<"posts">): string {
-  return `/posts/${getPostHash(post)}/`;
+  return withBase(`/posts/${getPostHash(post)}/`);
 }
 
 export function formatDate(date: Date): string {

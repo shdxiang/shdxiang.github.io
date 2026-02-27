@@ -5,7 +5,7 @@ export const siteConfig = {
   url: "https://xiaoxiang.io",
   lang: "zh-CN",
   author: {
-    name: "xiaoxiang"
+    name: "Xiaoxiang"
   },
   social: {
     github: "https://github.com/shdxiang",

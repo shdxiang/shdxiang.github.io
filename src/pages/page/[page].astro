@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { siteConfig } from "../../config/site";
+import Pager from "../../components/Pager.astro";
 import { formatDate, getPostPath } from "../../lib/posts";
 
 export async function getStaticPaths({ paginate }) {
@@ -20,12 +21,6 @@ const { page } = Astro.props;
   description={siteConfig.description}
 >
   <section class="home-list">
-    <div class="section-head">
-      <p class="section-title">最新笔记</p>
-      <small>
-        按时间倒序，第 {page.currentPage} 页 / 共 {page.lastPage} 页（共 {page.total} 篇）
-      </small>
-    </div>
     <section class="grid">
       {page.data.map((post) => (
         <a class="card" href={getPostPath(post)}>
@@ -38,22 +33,11 @@ const { page } = Astro.props;
         </a>
       ))}
     </section>
-    <nav class="pager" aria-label="Pagination">
-      <span class="pager-status">
-        第 {page.currentPage} 页 / 共 {page.lastPage} 页
-      </span>
-      <div class="pager-links">
-        {page.url.prev && (
-          <a class="pager-link" href={page.url.prev}>
-            上一页
-          </a>
-        )}
-        {page.url.next && (
-          <a class="pager-link" href={page.url.next}>
-            下一页
-          </a>
-        )}
-      </div>
-    </nav>
+    <Pager
+      currentPage={page.currentPage}
+      lastPage={page.lastPage}
+      prevUrl={page.url.prev ?? undefined}
+      nextUrl={page.url.next ?? undefined}
+    />
   </section>
 </BaseLayout>

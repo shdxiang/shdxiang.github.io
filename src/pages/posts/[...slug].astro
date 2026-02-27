@@ -1,7 +1,9 @@
 ---
 import { getCollection, render } from "astro:content";
+import MarkdownRenderer from "../../components/MarkdownRenderer";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { siteConfig } from "../../config/site";
+import { withBase } from "../../lib/paths";
 import { formatDate, getPostHash } from "../../lib/posts";
 
 export async function getStaticPaths() {
@@ -13,7 +15,8 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content, headings } = await render(post);
+const { headings } = await render(post);
+const homePath = withBase("/");
 ---
 
 <BaseLayout
@@ -22,7 +25,7 @@ const { Content, headings } = await render(post);
 >
   <article class="post">
     <header class="post-header">
-      <a class="back" href="/">← 返回首页</a>
+      <a class="back" href={homePath}>← 返回首页</a>
       <h1>{post.data.title}</h1>
       <p class="meta">
         <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
@@ -48,7 +51,36 @@ const { Content, headings } = await render(post);
     )}
 
     <div class="prose">
-      <Content />
+      <MarkdownRenderer content={post.body} />
     </div>
   </article>
+  <script is:inline>
+    document.addEventListener("click", async (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const button = target.closest(".copy-code-btn");
+      if (!(button instanceof HTMLButtonElement)) return;
+      const wrapper = button.closest(".code-block");
+      const code = wrapper?.querySelector("pre code");
+      if (!(code instanceof HTMLElement) || !navigator.clipboard) return;
+      try {
+        await navigator.clipboard.writeText(code.innerText);
+        button.classList.remove("is-failed");
+        button.classList.add("is-copied");
+        button.setAttribute("aria-label", "Copied");
+        button.setAttribute("title", "Copied");
+      } catch {
+        button.classList.remove("is-copied");
+        button.classList.add("is-failed");
+        button.setAttribute("aria-label", "Copy failed");
+        button.setAttribute("title", "Copy failed");
+      } finally {
+        window.setTimeout(() => {
+          button.classList.remove("is-copied", "is-failed");
+          button.setAttribute("aria-label", "Copy code");
+          button.setAttribute("title", "Copy code");
+        }, 1200);
+      }
+    });
+  </script>
 </BaseLayout>

@@ -1,0 +1,90 @@
+---
+import { withBase } from "../lib/paths";
+
+interface Props {
+  currentPage: number;
+  lastPage: number;
+  prevUrl?: string;
+  nextUrl?: string;
+}
+
+const { currentPage, lastPage, prevUrl, nextUrl } = Astro.props;
+const homePath = withBase("/");
+const pagePrefix = withBase("/page/");
+
+function getPageUrl(pageNumber: number): string {
+  return pageNumber <= 1 ? homePath : `${pagePrefix}${pageNumber}/`;
+}
+
+function getVisibleItems(current: number, last: number): Array<number | "ellipsis"> {
+  const pages = new Set<number>([1, last]);
+  for (let i = current - 2; i <= current + 2; i += 1) {
+    if (i >= 1 && i <= last) pages.add(i);
+  }
+
+  const sorted = Array.from(pages).sort((a, b) => a - b);
+  const items: Array<number | "ellipsis"> = [];
+
+  for (let i = 0; i < sorted.length; i += 1) {
+    const value = sorted[i];
+    items.push(value);
+    const next = sorted[i + 1];
+    if (next && next - value > 1) items.push("ellipsis");
+  }
+
+  return items;
+}
+
+const visibleItems = getVisibleItems(currentPage, lastPage);
+---
+
+<nav class="pager" aria-label="Pagination">
+  <span class="pager-status">
+    第 {currentPage} 页 / 共 {lastPage} 页
+  </span>
+  <div class="pager-links">
+    {prevUrl && (
+      <a class="pager-link" href={prevUrl}>
+        上一页
+      </a>
+    )}
+    <div class="pager-pages">
+      {visibleItems.map((item) =>
+        item === "ellipsis" ? (
+          <span class="pager-ellipsis" aria-hidden="true">
+            ...
+          </span>
+        ) : (
+          <a
+            class:list={["pager-page", item === currentPage && "is-current"]}
+            href={getPageUrl(item)}
+            aria-current={item === currentPage ? "page" : undefined}
+          >
+            {item}
+          </a>
+        )
+      )}
+    </div>
+    {nextUrl && (
+      <a class="pager-link" href={nextUrl}>
+        下一页
+      </a>
+    )}
+  </div>
+  <form
+    class="pager-jump"
+    onsubmit={`const i=this.querySelector('input[name=page]');const p=Number(i?.value||0);if(!Number.isInteger(p)||p<1||p>${lastPage}){i?.focus();return false;}window.location.href=(p===1?${JSON.stringify(homePath)}:${JSON.stringify(pagePrefix)}+p+'/');return false;`}
+  >
+    <label>跳转到</label>
+    <input
+      name="page"
+      type="number"
+      inputmode="numeric"
+      min="1"
+      max={lastPage}
+      value={currentPage}
+      aria-label={`输入 1 到 ${lastPage} 的页码`}
+    />
+    <button type="submit">前往</button>
+  </form>
+</nav>

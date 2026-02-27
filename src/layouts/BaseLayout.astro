@@ -1,7 +1,9 @@
 ---
 import "../styles/global.css";
 import "katex/dist/katex.min.css";
+import "highlight.js/styles/github-dark.css";
 import { siteConfig } from "../config/site";
+import { withBase } from "../lib/paths";
 
 interface Props {
   title?: string;
@@ -14,7 +16,9 @@ const {
   description = siteConfig.description,
   path = Astro.url.pathname
 } = Astro.props;
-const canonicalUrl = new URL(path, siteConfig.url).toString();
+const canonicalOrigin = Astro.site?.toString() ?? siteConfig.url;
+const canonicalUrl = new URL(path, canonicalOrigin).toString();
+const currentYear = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -33,11 +37,11 @@ const canonicalUrl = new URL(path, siteConfig.url).toString();
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="icon" type="image/png" href="/assets/img/favicons/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/assets/img/favicons/favicon.svg" />
-    <link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png" />
-    <link rel="manifest" href="/assets/img/favicons/site.webmanifest" />
+    <link rel="icon" type="image/png" href={withBase("/assets/img/favicons/favicon-96x96.png")} sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href={withBase("/assets/img/favicons/favicon.svg")} />
+    <link rel="shortcut icon" href={withBase("/assets/img/favicons/favicon.ico")} />
+    <link rel="apple-touch-icon" sizes="180x180" href={withBase("/assets/img/favicons/apple-touch-icon.png")} />
+    <link rel="manifest" href={withBase("/assets/img/favicons/site.webmanifest")} />
     <title>{title}</title>
     {
       siteConfig.analytics.goatcounterId && (
@@ -51,21 +55,44 @@ const canonicalUrl = new URL(path, siteConfig.url).toString();
     }
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="/">{siteConfig.title}</a>
-      <nav>
-        <a href="/">首页</a>
-      </nav>
-    </header>
     <main class="container">
       <slot />
     </main>
     <footer class="site-footer">
       <p>
         <span>{siteConfig.author.name}</span>
-        <a href={siteConfig.social.github} target="_blank" rel="noreferrer">GitHub</a>
-        <a href={siteConfig.social.twitter} target="_blank" rel="noreferrer">X</a>
+        <a
+          class="footer-social-link"
+          href={siteConfig.social.github}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="GitHub"
+        >
+          <img
+            class="footer-social-icon"
+            src="https://cdn.simpleicons.org/github"
+            alt="GitHub"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+        <a
+          class="footer-social-link"
+          href={siteConfig.social.twitter}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="X"
+        >
+          <img
+            class="footer-social-icon"
+            src="https://cdn.simpleicons.org/x"
+            alt="X"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
       </p>
+      <p class="copyright">© {currentYear} {siteConfig.author.name}. All rights reserved.</p>
     </footer>
   </body>
 </html>

@@ -2,6 +2,8 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { siteConfig } from "../config/site";
+import { withBase } from "../lib/paths";
+import Pager from "../components/Pager.astro";
 import { formatDate, getPostPath } from "../lib/posts";
 
 const posts = (await getCollection("posts", ({ data }) => !data.draft)).sort(
@@ -11,6 +13,7 @@ const pageSize = 24;
 const recent = posts.slice(0, pageSize);
 const totalPosts = posts.length;
 const totalPages = Math.ceil(totalPosts / pageSize);
+const secondPagePath = withBase("/page/2/");
 ---
 
 <BaseLayout
@@ -19,7 +22,6 @@ const totalPages = Math.ceil(totalPosts / pageSize);
 >
   <section class="home-hero">
     <div class="hero-copy">
-      <p class="eyebrow">研究笔记</p>
       <h1>把前沿论文沉淀为持久的阅读笔记。</h1>
       <p class="subtitle">
         涵盖机器学习、量子计算、机器人、物理学等多个研究方向，提炼论文核心贡献，追踪前沿研究进展。
@@ -28,12 +30,6 @@ const totalPages = Math.ceil(totalPosts / pageSize);
   </section>
 
   <section class="home-list">
-    <div class="section-head">
-      <p class="section-title">最新笔记</p>
-      <small>
-        按时间倒序，第 1 页 / 共 {totalPages} 页（共 {totalPosts} 篇）
-      </small>
-    </div>
     <section class="grid">
       {recent.map((post) => (
         <a class="card" href={getPostPath(post)}>
@@ -48,12 +44,7 @@ const totalPages = Math.ceil(totalPosts / pageSize);
     </section>
     {
       totalPages > 1 && (
-        <nav class="pager" aria-label="Pagination">
-          <span class="pager-status">第 1 页 / 共 {totalPages} 页</span>
-          <div class="pager-links">
-            <a class="pager-link" href="/page/2/">下一页</a>
-          </div>
-        </nav>
+        <Pager currentPage={1} lastPage={totalPages} nextUrl={secondPagePath} />
       )
     }
   </section>
