@@ -51,7 +51,7 @@ const homePath = withBase("/");
     )}
 
     <div class="prose">
-      <MarkdownRenderer content={post.body} />
+      <MarkdownRenderer content={post.body ?? ""} />
     </div>
   </article>
   <script is:inline>
