@@ -40,6 +40,6 @@ npm run preview
 ## URL structure
 
 - Home: `/`
-- Posts: `/posts/YYYY/MM/DD/slug/`
+- Posts: `/posts/<md5(filename)>/`
 
-`slug` is generated from the markdown filename after removing the `YYYY-MM-DD-` prefix.
+The post URL hash matches the legacy Jekyll behavior and is generated from the markdown filename (including `.md`) using MD5.

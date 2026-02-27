@@ -52,7 +52,7 @@ git push
 
 ## Important Notes
 
-- Posts use date-prefixed filenames and are mapped to `/posts/YYYY/MM/DD/slug/`
+- Posts use date-prefixed filenames and are mapped to `/posts/<md5(filename)>/`
 - Existing `_posts` content is loaded directly by Astro content collections
 - Site includes KaTeX support for math rendering in markdown
 - GitHub Pages deployment is automatic on push to main branch
