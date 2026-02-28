@@ -42,11 +42,11 @@ LNU-Net和IBU-Net均继承自U-Net的经典编码器-解码器结构：
 **LNU-Net（Layer Normalization U-Net）**：
 - 在每个卷积块后应用层归一化（Layer Normalization, LN）。
 - LN沿特征通道维度计算均值和方差，对单个样本的所有特征进行归一化，减少内部协变量偏移。
-- 公式：对于输入特征 \( x \)，归一化后输出为：
-  \[
+- 公式：对于输入特征 $ x $，归一化后输出为：
+  $$
   \hat{x} = \frac{x - \mu}{\sqrt{\sigma^2 + \epsilon}} \cdot \gamma + \beta
-  \]
-  其中 \(\mu\) 和 \(\sigma\) 为沿特征维度的均值和标准差，\(\gamma\) 和 \(\beta\) 为可学习的缩放和偏移参数。
+  $$
+  其中 $\mu$ 和 $\sigma$ 为沿特征维度的均值和标准差，$\gamma$ 和 $\beta$ 为可学习的缩放和偏移参数。
 - 优势：对小批量数据更稳定，适合医学图像中常见的样本量有限场景。
 
 **IBU-Net（Instance-Batch Normalization U-Net）**：

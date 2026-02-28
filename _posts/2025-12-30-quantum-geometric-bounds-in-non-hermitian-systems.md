@@ -34,53 +34,53 @@ arxiv_id: 2512.23708v1
 
 ### 2.1 非厄米量子几何张量的重新定义
 在厄米系统中，量子几何张量定义为：
-\[
+$$
 Q_{\mu\nu} = \langle \partial_\mu \psi | (1 - |\psi\rangle\langle\psi|) | \partial_\nu \psi \rangle
-\]
+$$
 其中实部对应量子度规（quantum metric），虚部对应贝里曲率（Berry curvature）。
 
-在非厄米系统中，左右本征态不再相同（\( H|\psi_R\rangle = E|\psi_R\rangle \), \( H^\dagger|\psi_L\rangle = E^*|\psi_L\rangle \)），且双正交归一化条件为 \(\langle\psi_L|\psi_R\rangle = 1\)。作者据此定义了**双正交基下的量子几何张量**：
-\[
+在非厄米系统中，左右本征态不再相同（$ H|\psi_R\rangle = E|\psi_R\rangle $, $ H^\dagger|\psi_L\rangle = E^*|\psi_L\rangle $），且双正交归一化条件为 $\langle\psi_L|\psi_R\rangle = 1$。作者据此定义了**双正交基下的量子几何张量**：
+$$
 Q_{\mu\nu}^{NH} = \langle \partial_\mu \psi_L | (1 - |\psi_R\rangle\langle\psi_L|) | \partial_\nu \psi_R \rangle
-\]
+$$
 这一构造保持了规范不变性，并还原到厄米极限。
 
 ### 2.2 关键不等式：几何边界的推导
 通过施瓦茨不等式和算符不等式技巧，作者证明了对任意非厄米系统，以下不等式成立：
-\[
+$$
 \text{Re}[Q_{\mu\nu}^{NH}] \geq \frac{|\text{Im}[Q_{\mu\nu}^{NH}]|^2}{4(\text{Im}[Q_{\mu\mu}^{NH}]\text{Im}[Q_{\nu\nu}^{NH}])^{1/2}}
-\]
+$$
 这一不等式揭示了**量子度规与贝里曲率之间的约束关系**，是非厄米系统特有的几何约束。
 
 ### 2.3 响应函数的几何边界
 作者进一步将几何张量与物理响应函数联系：
 
 1. **广义两点关联函数**：在非厄米系统中，线性响应理论需要修改。作者证明关联函数的谱权重受量子度规下界约束：
-\[
+$$
 \int d\omega \, \omega \text{Im}[\chi_{\mu\nu}(\omega)] \geq \frac{\hbar^2}{2} g_{\mu\nu}
-\]
-其中 \(g_{\mu\nu}\) 是量子度规的实部。
+$$
+其中 $g_{\mu\nu}$ 是量子度规的实部。
 
 2. **电导率张量**：通过Kubo公式，直流电导率满足：
-\[
+$$
 \sigma_{\mu\nu} \geq \frac{e^2}{\hbar} \mathcal{F}_{\mu\nu}
-\]
-其中 \(\mathcal{F}_{\mu\nu}\) 是与量子几何相关的量，在非厄米系统中包含额外耗散项。
+$$
+其中 $\mathcal{F}_{\mu\nu}$ 是与量子几何相关的量，在非厄米系统中包含额外耗散项。
 
 3. **光学权重（optical weight）**：在光学响应中，积分吸收强度存在下界：
-\[
+$$
 \int_0^\infty \text{Re}[\sigma_{\mu\nu}(\omega)] d\omega \geq \frac{\pi e^2}{2\hbar} g_{\mu\nu}
-\]
+$$
 
 ### 2.4 非厄米陈数的几何约束
 在二维系统中，非厄米陈数定义为：
-\[
+$$
 C^{NH} = \frac{1}{2\pi} \int_{\text{BZ}} \Omega^{NH} d^2k
-\]
+$$
 作者证明，非厄米陈数的绝对值受量子度规积分下界约束：
-\[
+$$
 |C^{NH}| \leq \frac{1}{\pi} \int_{\text{BZ}} \sqrt{\det g} d^2k
-\]
+$$
 这一关系将拓扑不变量与几何量直接联系，为拓扑相变提供了新的诊断工具。
 
 ## 三、创新点与理论贡献
@@ -112,8 +112,8 @@ C^{NH} = \frac{1}{2\pi} \int_{\text{BZ}} \Omega^{NH} d^2k
 4. **凝聚态材料**：具有显著非弹性散射的拓扑材料，如磁性拓扑绝缘体。
 
 ### 4.2 关键测量量
-- **光学导数的谱矩**：通过椭圆偏振光谱测量 \(\int \omega \text{Im}[\chi(\omega)] d\omega\)
-- **直流电导率的各向异性**：验证 \(\sigma_{xx}\sigma_{yy} \geq (\frac{e^2}{\hbar}\mathcal{F}_{xy})^2\)
+- **光学导数的谱矩**：通过椭圆偏振光谱测量 $\int \omega \text{Im}[\chi(\omega)] d\omega$
+- **直流电导率的各向异性**：验证 $\sigma_{xx}\sigma_{yy} \geq (\frac{e^2}{\hbar}\mathcal{F}_{xy})^2$
 - **非厄米陈数的间接测量**：通过边缘态输运或量子淬火动力学推断
 
 ## 五、实践应用建议与未来方向
