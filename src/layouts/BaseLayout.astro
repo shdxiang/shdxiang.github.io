@@ -60,7 +60,7 @@ const currentYear = new Date().getFullYear();
     </main>
     <footer class="site-footer">
       <p>
-        <span>{siteConfig.author.name}</span>
+        <a class="footer-author" href={withBase("/")}>{siteConfig.author.name}</a>
         <a
           class="footer-social-link"
           href={siteConfig.social.github}
