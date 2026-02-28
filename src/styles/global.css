@@ -92,7 +92,7 @@ a {
 }
 
 .site-footer .footer-author {
-  font-weight: 600;
+  font-weight: 400;
   color: var(--text);
   transition: color 0.15s ease;
 }
