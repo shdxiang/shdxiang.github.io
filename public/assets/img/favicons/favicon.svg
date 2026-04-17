@@ -1,9 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect x="30" y="30" width="452" height="452" rx="100" ry="100" fill="#dc2626"/>
-  <path d="M143 102 L369 102 L369 102 L348 102 L369 102 Z" fill="none"/>
-  <path d="M143 102 L328 102 L369 143 L369 410 L143 410 Z" fill="#fff" fill-opacity="0.94"/>
-  <path d="M328 102 L369 143 L328 143 Z" fill="#fcc8c8" fill-opacity="0.78"/>
-  <rect x="174" y="200" width="160" height="20" rx="10" fill="#dc2626" fill-opacity="0.55"/>
-  <rect x="174" y="252" width="103" height="20" rx="10" fill="#dc2626" fill-opacity="0.55"/>
-  <rect x="174" y="304" width="160" height="20" rx="10" fill="#dc2626" fill-opacity="0.55"/>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="480" height="480" rx="112" ry="112" fill="url(#g)"/>
+  <text x="256" y="256"
+        font-family="'Liberation Serif', 'DejaVu Serif', Georgia, 'Times New Roman', serif"
+        font-size="300" font-weight="700" font-style="italic"
+        fill="#ffffff" text-anchor="middle" dominant-baseline="central"
+        letter-spacing="-8">xx</text>
 </svg>
