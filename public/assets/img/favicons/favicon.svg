@@ -7,8 +7,7 @@
   </defs>
   <rect x="16" y="16" width="480" height="480" rx="112" ry="112" fill="url(#g)"/>
   <text x="256" y="256"
-        font-family="'Liberation Serif', 'DejaVu Serif', Georgia, 'Times New Roman', serif"
-        font-size="300" font-weight="700" font-style="italic"
-        fill="#ffffff" text-anchor="middle" dominant-baseline="central"
-        letter-spacing="-8">xx</text>
+        font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif"
+        font-size="400" font-weight="700"
+        fill="#ffffff" text-anchor="middle" dominant-baseline="central">ξ</text>
 </svg>
