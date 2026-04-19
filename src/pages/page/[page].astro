@@ -20,8 +20,8 @@ const { page } = Astro.props as { page: Page<CollectionEntry<"posts">> };
 ---
 
 <BaseLayout
-  title={`${siteConfig.title} | 第 ${page.currentPage} 页`}
-  description={siteConfig.description}
+  title={`第 ${page.currentPage} 页 / ${page.lastPage} · ${siteConfig.title}`}
+  description={`${siteConfig.tagline} · 第 ${page.currentPage} 页，共 ${page.lastPage} 页。`}
 >
   <div class="theme-toggle-wrap">
     <button class="theme-toggle" aria-label="Toggle dark mode">
