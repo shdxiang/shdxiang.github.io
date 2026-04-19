@@ -140,14 +140,33 @@ a {
   position: relative;
 }
 
-.home-intro::after {
-  content: "";
-  display: block;
-  width: 3rem;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent), #f97316);
-  border-radius: 2px;
+.home-stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  justify-content: center;
   margin: 1.4rem auto 0;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-solid);
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.home-stats strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.home-stats .dot {
+  color: var(--border);
+}
+
+.home-stats .topics {
+  color: var(--muted);
 }
 
 .home-intro h1 {
