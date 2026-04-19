@@ -35,11 +35,11 @@ const secondPagePath = withBase("/page/2/");
     <section class="grid">
       {recent.map((post, i) => (
         <a class="card" href={getPostPath(post)} style={`animation-delay:${Math.min(i * 0.04, 0.4)}s`}>
-          <p class="meta">
-            <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
-            {post.data.arxiv_id && <span>arXiv: {post.data.arxiv_id}</span>}
-          </p>
           <h3>{post.data.title}</h3>
+          <p class="meta">
+            {post.data.arxiv_id && <span>arXiv: {post.data.arxiv_id}</span>}
+            <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+          </p>
           {post.data.description && <p class="card-desc">{post.data.description}</p>}
         </a>
       ))}
