@@ -1,5 +1,6 @@
 export const siteConfig = {
   title: "xiaoxiang.io",
+  titleCased: "Xiaoxiang.io",
   tagline: "前沿论文收集与整理",
   description:
     "前沿论文收集与整理：机器学习、大模型、量子计算、机器人与物理学等方向的 arXiv 论文笔记与解读。",

@@ -20,7 +20,7 @@ const { page } = Astro.props as { page: Page<CollectionEntry<"posts">> };
 ---
 
 <BaseLayout
-  title={`第 ${page.currentPage} 页 / ${page.lastPage} · ${siteConfig.title}`}
+  title={`第 ${page.currentPage} 页 / ${page.lastPage} · ${siteConfig.titleCased}`}
   description={`${siteConfig.tagline} · 第 ${page.currentPage} 页，共 ${page.lastPage} 页。`}
 >
   <div class="theme-toggle-wrap">

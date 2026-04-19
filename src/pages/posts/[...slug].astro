@@ -58,7 +58,7 @@ const breadcrumbSchema = {
 ---
 
 <BaseLayout
-  title={`${post.data.title} · ${siteConfig.title}`}
+  title={`${post.data.title} · ${siteConfig.titleCased}`}
   description={post.data.description ?? post.data.title}
   ogType="article"
   publishedTime={publishedIso}
