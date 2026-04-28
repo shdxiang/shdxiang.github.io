@@ -1,5 +1,5 @@
 ---
-title: "Correlated Quantum Dephasometry: Symmetry-Resolved Noise Spectroscopy of Two-Dimensional Superconductors and Altermagnets"
+title: "关联量子退相位测量：二维超导体与交替磁体的对称性分辨噪声谱学"
 date: 2026-04-28 08:28:04 +0800
 arxiv_id: 2604.22751v1
 ---
